@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+
+<div>Список</div>
+<div>
+    <table border="1">
+        <tr>
+            <th><h3>Id</h3></th>
+            <th><h3>Name</h3></th>
+            <th><h3>Password</h3></th>
+            <th><h3>Role</h3></th>
+            <th colspan="3"><h3>Action with user</h3></th>
+        </tr>
+            <tr th:each="person:${persons}">
+            <td th:utext="${person.id}"></td>
+            <td th:utext="${person.name}"></td>
+            <td th:utext="${person.password}"></td>
+            <td th:utext="${person.getRolesToString()}"></td>
+                <td>
+                    <a th:href="@{/admin/deleteUser/{id}(id=${person.id})}">Delete</a>
+                </td>
+<!--                button-->
+<!--                <td>-->
+<!--                    <form th:action="@{/admin/deleteUser}" method="post">-->
+<!--                        <input type="text" hidden name="id" th:value="${person.id}">-->
+<!--                        <input type="submit" value="Delete">-->
+<!--                    </form>-->
+<!--                </td>-->
+                <td>
+                    <a th:href="@{/admin/updateUser/__${person.id}__}">Update</a>
+                </td>
+
+
+        </tr>
+    </table>
+</div>
+
+<table cellspacing="10">
+    <tr>
+        <td><a th:href="@{/admin/addUser}">Add Users</a></td>
+    </tr>
+</table>
+<br>
+<p><a th:href="@{/home}">Home</a></p>
+
+</body>
+</html>

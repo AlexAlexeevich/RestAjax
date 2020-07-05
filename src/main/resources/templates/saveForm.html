@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+
+<form th:action="@{/admin/save}" th:object="${user}" method="POST">
+    <table cellspacing="0" border="1">
+        <tr>
+            <td>Id</td>
+            <td>
+                <div th:if="${id != null}">
+                    <input type="hidden" th:field="*{id}" th:text="${user.id}"/>
+                </div>
+                <div th:if="${id == null}">
+                    <input type="hidden" th:field="*{id}"/>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td>
+                <div th:if="${id != null}">
+                    <input type="text" th:field="*{name}" th:placeholder="${user.name}"/>
+                </div>
+                <div th:if="${id == null}">
+                    <input type="text" th:field="*{name}"/>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td>
+                <div th:if="${id != null}">
+                    <input type="password" th:value="${user.password}" th:name="password">
+                </div>
+                <div th:if="${id == null}">
+                    <input type="password" th:field="*{password}"/>
+                </div>
+
+            </td>
+        </tr>
+        <tr>
+            <td>Role</td>
+            <td>
+                <table>
+                    <tr th:each="role:${listOfRoles}">
+                        <td><label><input type="checkbox" th:field="*{roles}" th:value="${role.role}"/></label></td>
+                        <td><p th:text="${role.role}"/></td>
+                    </tr>
+                </table>
+
+            </td>
+        </tr>
+    </table>
+
+    <input type="submit" value="Save"/>
+</form>
+
+</body>
+</html>
