@@ -13,10 +13,19 @@ Add new User
     You have been logged out.
 </div>
 <form th:action="@{/registration}" th:object="${user}" method="POST">
-    Name:
-    <input type="text" th:field="*{name}"/>
+    FirstName:
+    <input type="text" th:field="*{firstName}"/>
+    <br>
+    LastName:
+    <input type="text" th:field="*{lastName}"/>
+    <br>
+    Age:
+    <input type="text" th:field="*{age}"/>
     <br>
     Email
+    <input type="text" th:field="*{email}"/>
+    <br>
+    Password:
     <input type="password" th:field="*{password}"/>
     <br>
     <input type="submit" value="Create"/>

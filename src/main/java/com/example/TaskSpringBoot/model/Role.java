@@ -2,6 +2,7 @@ package com.example.TaskSpringBoot.model;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "roles")
+@JsonIgnoreProperties({ "authority"})
 public class Role implements GrantedAuthority {
 
     @Id
@@ -43,6 +45,10 @@ public class Role implements GrantedAuthority {
 
     public String getRole() {
         return role;
+    }
+
+    public String getRoleToString() {
+        return role.subSequence(role.indexOf("_") + 1, role.length()).toString();
     }
 
     public void setRole(String role) {

@@ -30,40 +30,17 @@ public class RegistrationController {
 
     @PostMapping("/registration")
     public String addUser(@ModelAttribute("user") User user, ModelMap model) {
-        User userFromDb = userRepo.findByName(user.getName());
-        System.out.println(user.getName() + " " + user.getPassword() + " " + user.getId());
+        User userFromDb = userRepo.findByFirstName(user.getFirstName());
+        System.out.println(user.getFirstName() + " " + user.getPassword() + " " + user.getId());
 
         if(userFromDb != null) {
             System.out.println(" yes");
             model.addAttribute("message", "User exists!");
             return "registration";
         }
-        user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
+        user.setRoles(Collections.singleton(new Role(2L, "ROLE_USER")));
+        System.out.println("lastName " + user.getLastName());
         userRepo.save(user);
         return "redirect:/login";
     }
-
-
-//    private UserService userService;
-//
-//    @Autowired
-//    public RegistrationController(UserService userService) {
-//        this.userService = userService;
-//    }
-//
-//    @GetMapping("/registration")
-//    public String registration(Model model) {
-//        model.addAttribute("userForm", new User());
-//        return "registration";
-//    }
-//
-//    @PostMapping("/registration")
-//    public String addUser(@ModelAttribute("userForm")  User userForm, BindingResult bindingResult, Model model) {
-//
-//        if (bindingResult.hasErrors()) {
-//            return "registration";
-//        }
-//        userService.addUser(userForm);
-//        return "redirect:/login";
-//    }
 }

@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User getUser(String login) {
-        return userDao.findByUserName(login);
+        return userDao.findByUserEmail(login);
     }
 
     @Override
@@ -60,12 +60,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void addUser(User user) {
-        User userFromDB = userDao.findByUserName(user.getName());
+    public User addUser(User user) {
+        User userFromDB = userDao.findByUserEmail(user.getEmail());
         if (userFromDB != null) {
-            return;
+            return userFromDB;
         }
         userDao.addUser(user);
+        return userFromDB;
     }
 
     @Override
